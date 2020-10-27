@@ -74,6 +74,10 @@ public class SampleController {
     @FXML
     private Button clearTabOneButton;
 
+    /**
+     * clear account creation fields and reset all buttons/check boxes.
+     * @param event clicking the clear button.
+     */
     @FXML
     void clearTabOne(ActionEvent event) {
     	fName.setText("");
@@ -102,6 +106,7 @@ public class SampleController {
 		isLoyal.setDisable(true);
     }
     
+    
     /**
      * When savings account is clicked the proper check boxes are disabled and cleared for direct deposit and isloyal. 
      * @param event clicking the savings radio button.
@@ -114,6 +119,7 @@ public class SampleController {
 		isLoyal.setDisable(false);
     }
     
+    
     /**
      * When money market account is clicked check boxes are disabled and cleared for direct deposit and isloyal. 
      * @param event clicking the money market radio button.
@@ -125,6 +131,7 @@ public class SampleController {
 		isLoyal.setSelected(false);
 		isLoyal.setDisable(true);
     }
+    
     
     /**
      * checks if a potential str could be a valid balance for an account.
@@ -145,6 +152,7 @@ public class SampleController {
     	}
     	
     }
+    
     
     /**
      * checks if a potential triple of strings could be a valid date. 
@@ -172,6 +180,7 @@ public class SampleController {
     	}return false;
     }
    
+    
     /**
      * checks for correct input is received when trying to create an account.
      * @return true if all input is correct, false otherwise.

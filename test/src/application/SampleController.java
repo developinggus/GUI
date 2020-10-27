@@ -70,6 +70,9 @@ public class SampleController {
     
     @FXML
     private Button openAccountButton;
+    
+    @FXML
+    private Button closeAccountButton;
 
 
     /**
@@ -171,23 +174,27 @@ public class SampleController {
     	//missing account type
     	if(!rbChecking.isSelected() && !rbSavings.isSelected() && !rbMoneyMarket.isSelected() ) {
     		//output error about input missing for account type 
+    		messageArea.setText("ERROR: Missing account type.\n");
     		return false;
     	}
     	
     	//missing name fields
     	if(fName.getText().equals("") || lName.getText().equals("")) {
     		//output error about missing input
+    		messageArea.setText("ERROR: Incomplete name field.\n");
     		return false; 
     	}
     	
     	//missing or invalid balance
     	if(!isValidBalance(balance.getText())) {
     		//output error about missing/ improper balance input
+    		messageArea.setText("ERROR: Missing or improper balance.\n");
     		return false;
     	}
     	
     	//missing or invalid date
     	if(!isValidDate(year.getText(), month.getText(), day.getText())) {
+    		messageArea.setText("ERROR: Missing or invalid date.\n");
     		return false;
     	}
     	
@@ -236,6 +243,17 @@ public class SampleController {
     	 * take in balance, make
     	 * when account button is clicked make account and add to database
     	 */
+    }
+    
+    /**
+     * Close account with valid user input
+     * @param event
+     */
+    @FXML
+    void closeAccount(ActionEvent event) {
+    	messageArea.setText("CLOSING ACCOUNT.\n");
+    	if(!validAccountInput()) return;
+
     }
 
 }

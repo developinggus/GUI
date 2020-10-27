@@ -71,11 +71,22 @@ public class SampleController {
     @FXML
     private Button openAccountButton;
 
+    @FXML
+    private Button clearTabOneButton;
 
-    /**
-     * Runs main structure.
-     */
-    void run() {
+    @FXML
+    void clearTabOne(ActionEvent event) {
+    	fName.setText("");
+    	lName.setText("");
+    	balance.setText("");
+    	month.setText("");
+    	day.setText("");
+    	year.setText("");
+    	directDeposit.setSelected(false);
+		directDeposit.setDisable(false);
+		isLoyal.setSelected(false);
+		isLoyal.setDisable(false);
+		accountType.selectToggle(null);
     	
     }
     
@@ -214,28 +225,22 @@ public class SampleController {
     		Checking acc = new Checking(p, Double.parseDouble(balance.getText()), 
     									d, directDeposit.isSelected());
     		messageArea.setText(acc.toString());
+    		accounts.add(acc);
     	}
     	
     	if(rbSavings.isSelected()) {
     		Savings acc = new Savings(p, Double.parseDouble(balance.getText()), 
     									d, isLoyal.isSelected());
     		messageArea.setText(acc.toString());
+    		accounts.add(acc);
     	}
     	
     	if(rbMoneyMarket.isSelected()) {
     		MoneyMarket acc = new MoneyMarket(p, Double.parseDouble(balance.getText()), d);
     		messageArea.setText(acc.toString());
+    		accounts.add(acc);
     	}
     	
-    	/**
-    	 * when program starts initialize an account database
-    	 * 
-    	 * CHECK FOR VALID INPUTS
-    	 * take in name, make profile
-    	 * take in date, make date
-    	 * take in balance, make
-    	 * when account button is clicked make account and add to database
-    	 */
     }
 
 }

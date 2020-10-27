@@ -90,7 +90,7 @@
                               <CheckBox fx:id="directDeposit" mnemonicParsing="false" text="direct deposit" GridPane.columnIndex="3" />
                               <CheckBox fx:id="isLoyal" mnemonicParsing="false" text="loyal customer" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                               <Button fx:id="openAccountButton" mnemonicParsing="false" onAction="#openAccount" text="Open Account" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                              <Button mnemonicParsing="false" text="Close Account" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                              <Button fx:id="closeAccountButton" mnemonicParsing="false" onAction="#closeAccount" text="Close Account" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                               <Button fx:id="clearTabOneButton" mnemonicParsing="false" onAction="#clearTabOne" text="Clear" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>

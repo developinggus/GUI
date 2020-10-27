@@ -74,11 +74,26 @@ public class SampleController {
     @FXML
     private Button closeAccountButton;
 
+    @FXML
+    private Button clearTabOneButton;
 
     /**
-     * Runs main structure.
+     * clear account creation fields and reset all buttons/check boxes.
+     * @param event clicking the clear button.
      */
-    void run() {
+    @FXML
+    void clearTabOne(ActionEvent event) {
+    	fName.setText("");
+    	lName.setText("");
+    	balance.setText("");
+    	month.setText("");
+    	day.setText("");
+    	year.setText("");
+    	directDeposit.setSelected(false);
+		directDeposit.setDisable(false);
+		isLoyal.setSelected(false);
+		isLoyal.setDisable(false);
+		accountType.selectToggle(null);
     	
     }
     
@@ -94,6 +109,7 @@ public class SampleController {
 		isLoyal.setDisable(true);
     }
     
+    
     /**
      * When savings account is clicked the proper check boxes are disabled and cleared for direct deposit and isloyal. 
      * @param event clicking the savings radio button.
@@ -106,6 +122,7 @@ public class SampleController {
 		isLoyal.setDisable(false);
     }
     
+    
     /**
      * When money market account is clicked check boxes are disabled and cleared for direct deposit and isloyal. 
      * @param event clicking the money market radio button.
@@ -117,6 +134,7 @@ public class SampleController {
 		isLoyal.setSelected(false);
 		isLoyal.setDisable(true);
     }
+    
     
     /**
      * checks if a potential str could be a valid balance for an account.
@@ -137,6 +155,7 @@ public class SampleController {
     	}
     	
     }
+    
     
     /**
      * checks if a potential triple of strings could be a valid date. 
@@ -164,6 +183,7 @@ public class SampleController {
     	}return false;
     }
    
+    
     /**
      * checks for correct input is received when trying to create an account.
      * @return true if all input is correct, false otherwise.
@@ -221,28 +241,22 @@ public class SampleController {
     		Checking acc = new Checking(p, Double.parseDouble(balance.getText()), 
     									d, directDeposit.isSelected());
     		messageArea.setText(acc.toString());
+    		accounts.add(acc);
     	}
     	
     	if(rbSavings.isSelected()) {
     		Savings acc = new Savings(p, Double.parseDouble(balance.getText()), 
     									d, isLoyal.isSelected());
     		messageArea.setText(acc.toString());
+    		accounts.add(acc);
     	}
     	
     	if(rbMoneyMarket.isSelected()) {
     		MoneyMarket acc = new MoneyMarket(p, Double.parseDouble(balance.getText()), d);
     		messageArea.setText(acc.toString());
+    		accounts.add(acc);
     	}
     	
-    	/**
-    	 * when program starts initialize an account database
-    	 * 
-    	 * CHECK FOR VALID INPUTS
-    	 * take in name, make profile
-    	 * take in date, make date
-    	 * take in balance, make
-    	 * when account button is clicked make account and add to database
-    	 */
     }
     
     /**

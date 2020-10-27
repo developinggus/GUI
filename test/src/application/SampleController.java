@@ -211,17 +211,19 @@ public class SampleController {
     			Integer.parseInt(day.getText()));
     	
     	if(rbChecking.isSelected()) {
-    		Checking acc = new Checking(p, Double.parseDouble(balance.getText()), d, directDeposit.isSelected());
+    		Checking acc = new Checking(p, Double.parseDouble(balance.getText()), 
+    									d, directDeposit.isSelected());
     		messageArea.setText(acc.toString());
     	}
     	
     	if(rbSavings.isSelected()) {
-    		Savings acc = new Savings(p, Double.parseDouble(balance.getText()), d, isLoyal.isSelected());
+    		Savings acc = new Savings(p, Double.parseDouble(balance.getText()), 
+    									d, isLoyal.isSelected());
     		messageArea.setText(acc.toString());
     	}
     	
-    	if(rbChecking.isSelected()) {
-    		Checking acc = new Checking(p, Double.parseDouble(balance.getText()), d, directDeposit.isSelected());
+    	if(rbMoneyMarket.isSelected()) {
+    		MoneyMarket acc = new MoneyMarket(p, Double.parseDouble(balance.getText()), d);
     		messageArea.setText(acc.toString());
     	}
     	

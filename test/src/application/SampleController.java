@@ -189,7 +189,8 @@ public class SampleController {
      * @return true if all input is correct, false otherwise.
      */
     private boolean validAccountInput() {
-    	//check for missing user input.
+    	//currently just appends so output can be a bit cluttered
+    	
     	boolean hasError = false;
     	//missing account type
     	if(!rbChecking.isSelected() && !rbSavings.isSelected() && !rbMoneyMarket.isSelected() ) {

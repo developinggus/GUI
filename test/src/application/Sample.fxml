@@ -9,12 +9,15 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <top>
@@ -24,7 +27,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane layoutX="30.0" prefHeight="181.0" prefWidth="734.0">
+                        <GridPane hgap="10.0" layoutX="30.0" prefHeight="181.0" prefWidth="734.0" vgap="10.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="68.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="248.0" minWidth="10.0" prefWidth="217.0" />
@@ -46,18 +49,46 @@
                               <TextField fx:id="fName" promptText="First Name" GridPane.columnIndex="1" />
                               <TextField fx:id="lName" promptText="Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField fx:id="balance" promptText="\$$$$" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <HBox prefHeight="25.0" prefWidth="222.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField fx:id="month" prefHeight="27.0" prefWidth="33.0" text="mm" />
-                                    <TextField fx:id="day" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="33.0" text="dd" />
-                                    <TextField fx:id="year" layoutX="43.0" layoutY="10.0" prefHeight="27.0" prefWidth="48.0" text="yyyy" />
+                                    <TextField fx:id="month" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" promptText="mm" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="day" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="60.0" promptText="dd" />
+                                    <Text layoutX="81.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="year" alignment="CENTER" layoutX="43.0" layoutY="10.0" prefHeight="27.0" prefWidth="75.0" promptText="yyyy" />
                                  </children>
+                                 <GridPane.margin>
+                                    <Insets top="5.0" />
+                                 </GridPane.margin>
                               </HBox>
-                              <RadioButton mnemonicParsing="false" text="Checking" GridPane.columnIndex="2" />
-                              <RadioButton mnemonicParsing="false" text="Savings" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <RadioButton mnemonicParsing="false" text="Money Market" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                              <CheckBox mnemonicParsing="false" text="direct deposit" GridPane.columnIndex="3" />
-                              <CheckBox mnemonicParsing="false" text="loyal customer" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <RadioButton fx:id="rbChecking" mnemonicParsing="false" onMouseClicked="#checkingRbClicked" text="Checking" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="accountType" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="rbSavings" mnemonicParsing="false" onMouseClicked="#savingsRbClicked" text="Savings" toggleGroup="$accountType" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </RadioButton>
+                              <RadioButton fx:id="rbMoneyMarket" mnemonicParsing="false" onMouseClicked="#moneyMarketRbClicked" text="Money Market" toggleGroup="$accountType" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </RadioButton>
+                              <CheckBox fx:id="directDeposit" mnemonicParsing="false" text="direct deposit" GridPane.columnIndex="3" />
+                              <CheckBox fx:id="isLoyal" mnemonicParsing="false" text="loyal customer" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                               <Button fx:id="openAccountButton" mnemonicParsing="false" onAction="#openAccount" text="Open Account" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                               <Button mnemonicParsing="false" text="Close Account" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                               <Button mnemonicParsing="false" text="Clear" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
@@ -69,7 +100,18 @@
           </Tab>
           <Tab text="Deposit/Withdraw Funds">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="140.0" layoutY="45.0" prefHeight="107.0" prefWidth="338.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab text="Account Database">
@@ -81,7 +123,7 @@
       </TabPane>
    </top>
    <bottom>
-      <TextArea text="&#10;" BorderPane.alignment="CENTER">
+      <TextArea fx:id="messageArea" text="&#10;" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>

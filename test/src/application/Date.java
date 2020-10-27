@@ -97,7 +97,7 @@ public class Date implements Comparable<Date> {
 	
 	/**
 	 * Checks if a date is valid.
-	 * out of range only i think
+	 * 
 	 * @return true if date is valid, false otherwise.
 	 */
 	public boolean isValid() {

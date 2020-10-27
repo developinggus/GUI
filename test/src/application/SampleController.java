@@ -190,35 +190,35 @@ public class SampleController {
      */
     private boolean validAccountInput() {
     	//check for missing user input.
-    	
+    	boolean hasError = false;
     	//missing account type
     	if(!rbChecking.isSelected() && !rbSavings.isSelected() && !rbMoneyMarket.isSelected() ) {
     		//output error about input missing for account type 
-    		messageArea.setText("ERROR: Missing account type.\n");
-    		return false;
+    		messageArea.appendText("ERROR: Missing account type.\n");
+    		hasError = true;
     	}
     	
     	//missing name fields
     	if(fName.getText().equals("") || lName.getText().equals("")) {
     		//output error about missing input
-    		messageArea.setText("ERROR: Incomplete name field.\n");
-    		return false; 
+    		messageArea.appendText("ERROR: Incomplete name field.\n");
+    		hasError = true;
     	}
     	
     	//missing or invalid balance
     	if(!isValidBalance(balance.getText())) {
     		//output error about missing/ improper balance input
-    		messageArea.setText("ERROR: Missing or improper balance.\n");
-    		return false;
+    		messageArea.appendText("ERROR: Missing or improper balance.\n");
+    		hasError = true;
     	}
     	
     	//missing or invalid date
     	if(!isValidDate(year.getText(), month.getText(), day.getText())) {
-    		messageArea.setText("ERROR: Missing or invalid date.\n");
-    		return false;
+    		messageArea.appendText("ERROR: Missing or invalid date.\n");
+    		hasError = true;
     	}
     	
-    	return true;
+    	return hasError;
     }
     
     

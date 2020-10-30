@@ -155,21 +155,5 @@ public class Date implements Comparable<Date> {
 	}
 	
 	public static void main (String[] args) {
-		Date date1 = new Date(2001, 3, 4);
-		Date date2 = new Date(2001, 3, 4);
-		Date date3 = new Date(2001, 3, 4);
-
-		System.out.println(date1.equals(date2));
-		System.out.println(date2.equals(date1));
-
-		System.out.println(date1.equals(date3));
-		System.out.println(date3.equals(date2));
-		System.out.println(date3.equals(date3));
-		
-		Date date4 = new Date("1/02/1995");
-		System.out.println(date4.toString());
-
-
-		
 	}
 }

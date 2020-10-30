@@ -89,6 +89,7 @@ public class SampleController {
     	month.setText("");
     	day.setText("");
     	year.setText("");
+    	messageArea.setText("");
     	directDeposit.setSelected(false);
 		directDeposit.setDisable(false);
 		isLoyal.setSelected(false);
@@ -142,6 +143,10 @@ public class SampleController {
      * @return true if str is a valid balance, false otherwise
      */
     private boolean isValidBalance(String str) {
+    	if(str.equals("")) {
+    		return false;
+    	}
+    	
     	
     	try {
     		double balance = Double.parseDouble(str);
@@ -188,7 +193,7 @@ public class SampleController {
      * checks for correct input is received when trying to create an account.
      * @return true if all input is correct, false otherwise.
      */
-    private boolean validAccountInput() {
+    private boolean invalidAccountInput() {
     	//currently just appends so output can be a bit cluttered
     	
     	boolean hasError = false;
@@ -230,7 +235,7 @@ public class SampleController {
     @FXML
     void openAccount(ActionEvent event) {
     	
-    	if(!validAccountInput()) return;
+    	if(invalidAccountInput()) return;
     	
     	Profile p = new Profile(fName.getText(), lName.getText());
     	
@@ -238,24 +243,41 @@ public class SampleController {
     			Integer.parseInt(month.getText()), 
     			Integer.parseInt(day.getText()));
     	
+    	
     	if(rbChecking.isSelected()) {
     		Checking acc = new Checking(p, Double.parseDouble(balance.getText()), 
     									d, directDeposit.isSelected());
-    		messageArea.setText(acc.toString());
-    		accounts.add(acc);
+    		if(accounts.add(acc)) {
+    			accounts.add(acc);
+    			messageArea.appendText("Account opened and added to the database.\n");
+    		}
+    		else {
+    			messageArea.appendText("Account is already in the database.\n");
+    		}
     	}
     	
     	if(rbSavings.isSelected()) {
     		Savings acc = new Savings(p, Double.parseDouble(balance.getText()), 
     									d, isLoyal.isSelected());
-    		messageArea.setText(acc.toString());
-    		accounts.add(acc);
+    		if(accounts.add(acc)) {
+    			accounts.add(acc);
+    			messageArea.appendText("Account opened and added to the database.\n");
+    		}
+    		else {
+    			messageArea.appendText("Account is already in the database.\n");
+    		}
     	}
     	
     	if(rbMoneyMarket.isSelected()) {
     		MoneyMarket acc = new MoneyMarket(p, Double.parseDouble(balance.getText()), d);
-    		messageArea.setText(acc.toString());
-    		accounts.add(acc);
+    		if(accounts.add(acc)) {
+    			accounts.add(acc);
+    			messageArea.appendText("Account opened and added to the database.\n");
+    		}
+    		else {
+    			messageArea.appendText("Account is already in the database.\n");
+    		}
+
     	}
     	
     }
@@ -266,7 +288,7 @@ public class SampleController {
      */
     @FXML
     void closeAccount(ActionEvent event) {
-    	if(!validAccountInput()) return;
+    	if(invalidAccountInput()) return;
     	
     	Profile p = new Profile(fName.getText(), lName.getText());
     	
@@ -278,10 +300,10 @@ public class SampleController {
     		Checking acc = new Checking(p, Double.parseDouble(balance.getText()), 
     									d, directDeposit.isSelected());
     		if(accounts.remove(acc)) {
-        		messageArea.setText("Account closed and removed from the database.");
+        		messageArea.appendText("Account closed and removed from the database.\n");
     		}
     		else {
-    			messageArea.setText("Account does not exist.");
+    			messageArea.appendText("Account does not exist.\n");
     		}
     	}
     	
@@ -289,10 +311,10 @@ public class SampleController {
     		Savings acc = new Savings(p, Double.parseDouble(balance.getText()), 
     									d, isLoyal.isSelected());
     		if(accounts.remove(acc)) {
-        		messageArea.setText("Account closed and removed from the database.");
+        		messageArea.appendText("Account closed and removed from the database.\n");
     		}
     		else {
-    			messageArea.setText("Account does not exist.");
+    			messageArea.appendText("Account does not exist.\n");
     		}
 
     	}
@@ -300,10 +322,10 @@ public class SampleController {
     	if(rbMoneyMarket.isSelected()) {
     		MoneyMarket acc = new MoneyMarket(p, Double.parseDouble(balance.getText()), d);
     		if(accounts.remove(acc)) {
-        		messageArea.setText("Account closed and removed from the database.");
+        		messageArea.appendText("Account closed and removed from the database.\n");
     		}
     		else {
-    			messageArea.setText("Account does not exist.");
+    			messageArea.appendText("Account does not exist.\n");
     		}
     	}
 

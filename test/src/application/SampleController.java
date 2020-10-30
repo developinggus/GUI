@@ -266,8 +266,46 @@ public class SampleController {
      */
     @FXML
     void closeAccount(ActionEvent event) {
-    	messageArea.setText("CLOSING ACCOUNT.\n");
     	if(!validAccountInput()) return;
+    	
+    	Profile p = new Profile(fName.getText(), lName.getText());
+    	
+    	Date d = new Date(Integer.parseInt(year.getText()), 
+    			Integer.parseInt(month.getText()), 
+    			Integer.parseInt(day.getText()));
+    	
+    	if(rbChecking.isSelected()) {
+    		Checking acc = new Checking(p, Double.parseDouble(balance.getText()), 
+    									d, directDeposit.isSelected());
+    		if(accounts.remove(acc)) {
+        		messageArea.setText("Account closed and removed from the database.");
+    		}
+    		else {
+    			messageArea.setText("Account does not exist.");
+    		}
+    	}
+    	
+    	if(rbSavings.isSelected()) {
+    		Savings acc = new Savings(p, Double.parseDouble(balance.getText()), 
+    									d, isLoyal.isSelected());
+    		if(accounts.remove(acc)) {
+        		messageArea.setText("Account closed and removed from the database.");
+    		}
+    		else {
+    			messageArea.setText("Account does not exist.");
+    		}
+
+    	}
+    	
+    	if(rbMoneyMarket.isSelected()) {
+    		MoneyMarket acc = new MoneyMarket(p, Double.parseDouble(balance.getText()), d);
+    		if(accounts.remove(acc)) {
+        		messageArea.setText("Account closed and removed from the database.");
+    		}
+    		else {
+    			messageArea.setText("Account does not exist.");
+    		}
+    	}
 
     }
 

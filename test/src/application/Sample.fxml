@@ -122,10 +122,10 @@
                               <Label prefHeight="17.0" prefWidth="62.0" text="First Name" />
                               <Label layoutX="10.0" layoutY="25.0" text="Last Name" GridPane.rowIndex="1" />
                               <Label layoutX="10.0" layoutY="70.0" text="Amount" GridPane.rowIndex="2" />
-                              <TextField fx:id="fName1" promptText="First Name" GridPane.columnIndex="1" />
-                              <TextField fx:id="lName1" promptText="Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField fx:id="Amount" promptText="\$$$$" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <RadioButton fx:id="rbChecking1" mnemonicParsing="false" onMouseClicked="#checkingRbClicked" text="Checking" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                              <TextField fx:id="fName2" promptText="First Name" GridPane.columnIndex="1" />
+                              <TextField fx:id="lName2" promptText="Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="amount" promptText="\$$$$" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <RadioButton fx:id="rbChecking2" mnemonicParsing="false" onMouseClicked="#checkingRbClicked" text="Checking" GridPane.columnIndex="2" GridPane.halignment="LEFT">
                                  <GridPane.margin>
                                     <Insets left="20.0" />
                                  </GridPane.margin>
@@ -133,18 +133,18 @@
                                     <ToggleGroup fx:id="accountType1" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="rbSavings1" mnemonicParsing="false" onMouseClicked="#savingsRbClicked" text="Savings" toggleGroup="$accountType1" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                              <RadioButton fx:id="rbSavings2" mnemonicParsing="false" onMouseClicked="#savingsRbClicked" text="Savings" toggleGroup="$accountType1" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="20.0" />
                                  </GridPane.margin>
                               </RadioButton>
-                              <RadioButton fx:id="rbMoneyMarket1" mnemonicParsing="false" onMouseClicked="#moneyMarketRbClicked" text="Money Market" toggleGroup="$accountType1" GridPane.columnIndex="3" GridPane.halignment="LEFT">
+                              <RadioButton fx:id="rbMoneyMarket2" mnemonicParsing="false" onMouseClicked="#moneyMarketRbClicked" text="Money Market" toggleGroup="$accountType1" GridPane.columnIndex="3" GridPane.halignment="LEFT">
                                  <padding>
                                     <Insets left="20.0" />
                                  </padding>
                               </RadioButton>
-                              <Button mnemonicParsing="false" text="Deposit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" text="Withdraw" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Button fx:id="depositButton" mnemonicParsing="false" text="Deposit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Button fx:id="withdrawButton" mnemonicParsing="false" text="Withdraw" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>

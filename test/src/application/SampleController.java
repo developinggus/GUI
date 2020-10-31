@@ -10,10 +10,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 
+
 public class SampleController {
 	/*
 	 * TO-DO
+	 * Tab 2 & Tab 3
+	 * Deposit/withdraw
 	 * 
+	 * Import/export / display similar to project 2 printing
 	 * 
 	 */
     
@@ -23,14 +27,25 @@ public class SampleController {
 	@FXML
     private TextField fName;
 
-   
+	
 	@FXML
     private TextField lName;
+	
+	@FXML
+    private TextField fName2;
 
-   
-    @FXML
+	
+	@FXML
+    private TextField lName2;
+
+    
+	@FXML
     private TextField balance;
 
+    
+    @FXML
+    private TextField Amount;
+    
     
     @FXML
     private TextField month;
@@ -48,7 +63,6 @@ public class SampleController {
     private TextArea messageArea;
     
     
-    
     @FXML
     private ToggleGroup accountType;
     
@@ -56,8 +70,19 @@ public class SampleController {
     @FXML
     private RadioButton rbChecking;
 
+    
     @FXML
     private RadioButton rbSavings;
+
+    
+    @FXML
+    private RadioButton rbChecking2;
+
+    @FXML
+    private RadioButton rbSavings2;
+
+    @FXML
+    private RadioButton rbMoneyMarket2;
 
     @FXML
     private CheckBox directDeposit;
@@ -77,6 +102,12 @@ public class SampleController {
     @FXML
     private Button clearTabOneButton;
 
+    @FXML
+    private Button withdrawButton;
+
+    @FXML
+    private Button depositButton;
+    
     /**
      * clear account creation fields and reset all buttons/check boxes.
      * @param event clicking the clear button.

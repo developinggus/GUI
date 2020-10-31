@@ -108,6 +108,15 @@ public class SampleController {
     @FXML
     private Button depositButton;
     
+    @FXML
+    private Button printAccountsButton;
+    
+    @FXML
+    private Button printAccountsByDateButton;
+    
+    @FXML
+    private Button printAccountByLastNameButton;
+    
     /**
      * clear account creation fields and reset all buttons/check boxes.
      * @param event clicking the clear button.
@@ -360,6 +369,32 @@ public class SampleController {
     		}
     	}
 
+    }
+    
+    /**
+     * Print all the accounts
+     */
+    @FXML
+    void printTheAccounts(ActionEvent event) {
+    	messageArea.appendText(accounts.printAccounts());
+    }
+    
+    /**
+     * Print accounts by date
+     * @param event
+     */
+    @FXML
+    void printAccountsByDate(ActionEvent event) {
+    	messageArea.appendText(accounts.printByDateOpen());
+    }
+    
+    /**
+     * Print accounts by last name
+     * @param event
+     */
+    @FXML
+    void printAccountsByLastName(ActionEvent event) {
+    	messageArea.appendText(accounts.printByLastName());
     }
 
 }

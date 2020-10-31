@@ -195,13 +195,13 @@ public class AccountDatabase {
 	/**
 	 * Sorts by the date they were opened. Then prints the accounts statements
 	 */
-	public void printByDateOpen() {
+	public String printByDateOpen() {
+		String output = "";
 		if(size == 0) {
-			System.out.print("Database is empty.");
-			return;
+			return "Database is empty.";
 		}
 		sortByDateOpen();
-		System.out.print("--Printing statements by date opened--");
+		//System.out.print("--Printing statements by date opened--");
 		for (int i = 0; i < size; i++) {
 			String account_info = accounts[i].toString();
 			String header = "";
@@ -254,26 +254,34 @@ public class AccountDatabase {
 				accounts[i].debit(item.monthlyFee() - item.monthlyInterest());
 				new_balance = "-new balance: $ " + String.format("%,.2f", accounts[i].getBalance());
 			}
+			output = output + '\n' + '\n' + header + '\n' + interest + '\n'
+					+ fee + '\n' + new_balance;
+			/*
 			System.out.println('\n');
 			System.out.println(header);
 			System.out.println(interest);
 			System.out.println(fee);
 			System.out.print(new_balance);
+			*/
 		}
+		output = output + "\n" + "--end of printing--";
+		/*
 		System.out.println("");
 		System.out.print("--end of printing--");
+		*/
+		return output;
 	}
 
 	/**
 	 * Prints accounts sorted by last name
 	 */
-	public void printByLastName() {
+	public String printByLastName() {
+		String output = "";
 		if(size == 0) {
-			System.out.print("Database is empty.");
-			return;
+			return "Database is empty.";
 		}
 		sortByLastName();
-		System.out.print("--Printing statements by last name--");
+		//System.out.print("--Printing statements by date opened--");
 		for (int i = 0; i < size; i++) {
 			String account_info = accounts[i].toString();
 			String header = "";
@@ -326,61 +334,81 @@ public class AccountDatabase {
 				accounts[i].debit(item.monthlyFee() - item.monthlyInterest());
 				new_balance = "-new balance: $ " + String.format("%,.2f", accounts[i].getBalance());
 			}
+			output = output + '\n' + '\n' + header + '\n' + interest + '\n'
+					+ fee + '\n' + new_balance;
+			/*
 			System.out.println('\n');
 			System.out.println(header);
 			System.out.println(interest);
 			System.out.println(fee);
 			System.out.print(new_balance);
+			*/
 		}
+		output = output + "\n" + "--end of printing--";
+		/*
 		System.out.println("");
 		System.out.print("--end of printing--");
+		*/
+		return output;
 	}
 
 	/**
 	 * Prints all the accounts
 	 */
-	public void printAccounts() {
+	public String printAccounts() {
 		if(size == 0) {
-			System.out.print("Database is empty.");
-			return;
+			return "Database is empty.";
 		}
 		
-		System.out.println("--Listing accounts in the database--");
+		String output = "--Listing accounts in the database--\n";
 		for (int i = 0; i < size; i++) {
 
 			if ( accounts[i] instanceof Checking ) {
 				Checking item = (Checking) accounts[i];
-				System.out.print("*Checking*" + accounts[i].toString());
+				//System.out.print("*Checking*" + accounts[i].toString());
+				output = output + "*Checking*" + accounts[i].toString();
 				if (item.getDirectDeposit() == true) {
-					System.out.print("*direct deposit account*");
+					//System.out.print("*direct deposit account*");
+					output = output + "*direct deposit account*";
 				}
-				System.out.println("");
+				//System.out.println("");
+				output = output + '\n';
 			}
 
 			if ( accounts[i] instanceof Savings ) {
 				Savings item = (Savings) accounts[i];
-				System.out.print("*Savings*" + accounts[i].toString());
+				//System.out.print("*Savings*" + accounts[i].toString());
+				output = output + "*Savings*" + accounts[i].toString();
 				if (item.getLoyalty() == true) {
-					System.out.print("*special Savings accounts*");
+					//System.out.print("*special Savings accounts*");
+					output = output + "*special Savings accounts*";
 				}
-				System.out.println("");
+				//System.out.println("");
+				output = output + "\n";
 			}
 
 			if ( accounts[i] instanceof MoneyMarket ) {
 				MoneyMarket item = (MoneyMarket) accounts[i];
-				System.out.print("*Money Market*" + accounts[i].toString());
+				//System.out.print("*Money Market*" + accounts[i].toString());
+				output = output + "*Money Market*" + accounts[i].toString();
 				if (item.getWithdrawals() == 1) {
-					System.out.print("*1 withdrawal*");
+					//System.out.print("*1 withdrawal*");
+					output = output + "*1 withdrawal*";
 				} else {
-					System.out.print("*" + Integer.toString(item.getWithdrawals()) + " withdrawals*");
+					//System.out.print("*" + Integer.toString(item.getWithdrawals()) + " withdrawals*");
+					output = output + "*" + Integer.toString(item.getWithdrawals()) + " withdrawals*";
 				}
-				System.out.println("");
+				//System.out.println("");
+				output = output + '\n';
 			}
 		}
-		System.out.print("--end of listing--");
+		//System.out.print("--end of listing--");
+		output = output + "--end of listing--";
+		return output;
 	}
 
 
 	public static void main (String[] args) {
+
 	}
 }

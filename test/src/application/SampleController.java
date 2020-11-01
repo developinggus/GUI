@@ -1,14 +1,21 @@
 package application;
 
+import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 
 public class SampleController {
@@ -22,11 +29,9 @@ public class SampleController {
 	 */
     
 	private AccountDatabase accounts = new AccountDatabase();
-	
-	
+		
 	@FXML
     private TextField fName;
-
 	
 	@FXML
     private TextField lName;
@@ -36,44 +41,34 @@ public class SampleController {
 	
 	@FXML
     private TextField lName2;
-
     
 	@FXML
     private TextField balance;
-
     
     @FXML
     private TextField amount;
-    
-    
+        
     @FXML
     private TextField month;
-
     
     @FXML
     private TextField day;
 
-    
     @FXML
     private TextField year;
     
-    
     @FXML
     private TextArea messageArea;
-    
-    
+        
     @FXML
     private ToggleGroup accountType;
-    
-    
+        
     @FXML
     private RadioButton rbChecking;
-
     
     @FXML
     private RadioButton rbSavings;
-
-    
+ 
     @FXML
     private RadioButton rbChecking2;
 
@@ -102,6 +97,12 @@ public class SampleController {
     private Button clearTabOneButton;
 
     @FXML
+    private MenuBar fileMenuButton;
+    
+    @FXML
+    private MenuItem importButton;
+    
+    @FXML
     private Button withdrawButton;
 
     @FXML
@@ -121,7 +122,7 @@ public class SampleController {
      * @param event clicking the clear button.
      */
     @FXML
-    void clearTabOne(ActionEvent event) {
+    private void clearTabOne(ActionEvent event) {
     	fName.setText("");
     	lName.setText("");
     	balance.setText("");
@@ -142,7 +143,7 @@ public class SampleController {
      * @param event clicking the checking radio button.
      */
     @FXML
-    void checkingRbClicked(MouseEvent event) {
+    private void checkingRbClicked(MouseEvent event) {
 		directDeposit.setSelected(false);
 		directDeposit.setDisable(false);
 		isLoyal.setSelected(false);
@@ -155,7 +156,7 @@ public class SampleController {
      * @param event clicking the savings radio button.
      */
     @FXML
-    void savingsRbClicked(MouseEvent event) {
+    private void savingsRbClicked(MouseEvent event) {
 		directDeposit.setSelected(false);
 		directDeposit.setDisable(true);
 		isLoyal.setSelected(false);
@@ -168,7 +169,7 @@ public class SampleController {
      * @param event clicking the money market radio button.
      */
     @FXML
-    void moneyMarketRbClicked(MouseEvent event) {
+    private void moneyMarketRbClicked(MouseEvent event) {
     	directDeposit.setSelected(false);
 		directDeposit.setDisable(true);
 		isLoyal.setSelected(false);
@@ -272,7 +273,7 @@ public class SampleController {
      * @param event clicking open account button.
      */
     @FXML
-    void openAccount(ActionEvent event) {
+    private void openAccount(ActionEvent event) {
     	
     	if(invalidAccountInput()) return;
     	
@@ -326,7 +327,7 @@ public class SampleController {
      * @param event
      */
     @FXML
-    void closeAccount(ActionEvent event) {
+    private void closeAccount(ActionEvent event) {
     	if(invalidAccountInput()) return;
     	
     	Profile p = new Profile(fName.getText(), lName.getText());
@@ -374,7 +375,7 @@ public class SampleController {
      * Print all the accounts
      */
     @FXML
-    void printTheAccounts(ActionEvent event) {
+    private void printTheAccounts(ActionEvent event) {
     	messageArea.appendText(accounts.printAccounts());
     }
     
@@ -383,7 +384,7 @@ public class SampleController {
      * @param event
      */
     @FXML
-    void printAccountsByDate(ActionEvent event) {
+    private void printAccountsByDate(ActionEvent event) {
     	messageArea.appendText(accounts.printByDateOpen());
     }
     
@@ -392,8 +393,36 @@ public class SampleController {
      * @param event
      */
     @FXML
-    void printAccountsByLastName(ActionEvent event) {
+    private void printAccountsByLastName(ActionEvent event) {
     	messageArea.appendText(accounts.printByLastName());
     }
 
+    /**
+     * Add event to scenebuilder
+     * imports file into account database
+     * 
+     * @param event clicking import button on third tab.
+     */
+    @FXML
+    void importFile(ActionEvent event) {
+    	FileChooser chooser = new FileChooser();
+    	chooser.setTitle("Open Source File for the Import");
+    	chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
+    			new ExtensionFilter("All Files", "*.*"));
+    	Stage stage = new Stage();
+    	File sourceFile = chooser.showOpenDialog(stage);
+    	
+    	//Code to import process txt file and add accounts accordingly 
+    	//all txt files will have a designated format.
+    	return;
+    }
+
+    /**
+     * export accounts from database to txt file
+     * @param event clicking export menu button
+     */
+    @FXML
+    void exportFile(ActionEvent event) {
+    	//export accounts database to a txt file
+    }
 }

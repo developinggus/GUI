@@ -23,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<BorderPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <top>
       <TabPane prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -161,12 +161,12 @@
                                     <Font size="29.0" />
                                  </font>
                               </Label>
-                              <MenuBar>
+                              <MenuBar fx:id="fileMenuButton">
                                 <menus>
                                   <Menu mnemonicParsing="false" text="File">
                                     <items>
-                                      <MenuItem mnemonicParsing="false" text="Import" />
-                                          <MenuItem mnemonicParsing="false" text="Export" />
+                                      <MenuItem fx:id="importButton" mnemonicParsing="false" onAction="#importFile" text="Import" />
+                                          <MenuItem fx:id="exportMenuButton" mnemonicParsing="false" onAction="#exportFile" text="Export" />
                                     </items>
                                   </Menu>
                                   <Menu mnemonicParsing="false" text="Print">

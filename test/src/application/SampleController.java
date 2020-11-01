@@ -398,7 +398,6 @@ public class SampleController {
     }
 
     /**
-     * Add event to scenebuilder
      * imports file into account database
      * 
      * @param event clicking import button on third tab.

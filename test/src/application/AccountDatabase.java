@@ -198,7 +198,7 @@ public class AccountDatabase {
 	public String printByDateOpen() {
 		String output = "";
 		if(size == 0) {
-			return "Database is empty.";
+			return "Database is empty.\n";
 		}
 		sortByDateOpen();
 		//System.out.print("--Printing statements by date opened--");
@@ -264,7 +264,7 @@ public class AccountDatabase {
 			System.out.print(new_balance);
 			*/
 		}
-		output = output + "\n" + "--end of printing--";
+		output = output + "\n" + "--end of list--\n";
 		/*
 		System.out.println("");
 		System.out.print("--end of printing--");
@@ -278,7 +278,7 @@ public class AccountDatabase {
 	public String printByLastName() {
 		String output = "";
 		if(size == 0) {
-			return "Database is empty.";
+			return "Database is empty.\n";
 		}
 		sortByLastName();
 		//System.out.print("--Printing statements by date opened--");
@@ -344,7 +344,7 @@ public class AccountDatabase {
 			System.out.print(new_balance);
 			*/
 		}
-		output = output + "\n" + "--end of printing--";
+		output = output + "\n" + "--end of list--\n";
 		/*
 		System.out.println("");
 		System.out.print("--end of printing--");
@@ -357,7 +357,7 @@ public class AccountDatabase {
 	 */
 	public String printAccounts() {
 		if(size == 0) {
-			return "Database is empty.";
+			return "Database is empty.\n";
 		}
 		
 		String output = "--Listing accounts in the database--\n";
@@ -402,8 +402,7 @@ public class AccountDatabase {
 				output = output + '\n';
 			}
 		}
-		//System.out.print("--end of listing--");
-		output = output + "--end of listing--";
+		output = output + "--end of list--\n";
 		return output;
 	}
 

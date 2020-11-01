@@ -263,7 +263,7 @@ public class SampleController {
     		messageArea.appendText("ERROR: Missing or invalid date.\n");
     		hasError = true;
     	}
-    	
+    	messageArea.appendText("\n");
     	return hasError;
     }
     
@@ -403,7 +403,7 @@ public class SampleController {
      * @param event clicking import button on third tab.
      */
     @FXML
-    void importFile(ActionEvent event) {
+    private void importFile(ActionEvent event) {
     	FileChooser chooser = new FileChooser();
     	chooser.setTitle("Open Source File for the Import");
     	chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
@@ -421,7 +421,88 @@ public class SampleController {
      * @param event clicking export menu button
      */
     @FXML
-    void exportFile(ActionEvent event) {
+    private void exportFile(ActionEvent event) {
     	//export accounts database to a txt file
     }
+    
+    /**
+     * checks if user input is valid for depositing.
+     * @return true if fields are valid, false otherwise.
+     */
+    private boolean invalidDepositInput() {
+    	boolean hasError = false;
+    	//missing account type
+    	if(!rbChecking2.isSelected() && !rbSavings2.isSelected() && !rbMoneyMarket2.isSelected() ) {
+    		//output error about input missing for account type 
+    		messageArea.appendText("ERROR: Missing account type.\n");
+    		hasError = true;
+    	}
+    	
+    	//missing name fields
+    	if(fName2.getText().equals("") || lName2.getText().equals("")) {
+    		//output error about missing input
+    		messageArea.appendText("ERROR: Incomplete name field.\n");
+    		hasError = true;
+    	}
+    	
+    	//missing or invalid balance
+    	if(!isValidBalance(amount.getText())) {
+    		//output error about missing/ improper balance input
+    		messageArea.appendText("ERROR: Missing or improper $$$$ Amount.\n");
+    		hasError = true;
+    	}
+    	
+    	messageArea.appendText("\n");
+    	return hasError;
+    }
+    
+    /**
+     * deposit a given amount in a pre-existing account.
+     * @param event deposit radio button is pressed
+     */
+    @FXML
+    void deposit(ActionEvent event) {
+    	
+    	if(invalidDepositInput()) {
+    		return;
+    	}
+    	
+    	Profile p = new Profile(fName2.getText(), lName2.getText());
+    	Date d = new Date("09/28/1994");
+
+    	if(rbChecking2.isSelected()) {
+    		Checking acc = new Checking(p, 0 , d, false);
+    		if(accounts.deposit(acc, Double.parseDouble(amount.getText()))) {
+            	messageArea.appendText("Success\n");
+            	return;
+        	}
+    		messageArea.appendText("Unsuccessful\n");
+        	return;
+    	}
+    	
+    	if(rbSavings2.isSelected()) {
+    		Savings acc = new Savings(p, 0, d, false);
+    		if(accounts.deposit(acc, Double.parseDouble(amount.getText()))) {
+            	messageArea.appendText("Success\n");
+            	return;
+        	}
+    		messageArea.appendText("Unsuccessful\n");
+        	return;
+    	}
+    	
+    	if(rbMoneyMarket2.isSelected()) {
+    		MoneyMarket acc = new MoneyMarket(p, 0 , d);
+    		if(accounts.deposit(acc, Double.parseDouble(amount.getText()))) {
+            	messageArea.appendText("Success\n");
+            	return;
+        	}
+    		messageArea.appendText("Unsuccessful\n");
+        	return;
+    	}
+    	
+
+    	//check user input exists in database
+    	
+    }
+    
 }

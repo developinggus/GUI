@@ -143,7 +143,7 @@
                                     <Insets left="20.0" />
                                  </padding>
                               </RadioButton>
-                              <Button fx:id="depositButton" mnemonicParsing="false" text="Deposit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Button fx:id="depositButton" mnemonicParsing="false" onAction="#deposit" text="Deposit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                               <Button fx:id="withdrawButton" mnemonicParsing="false" text="Withdraw" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>

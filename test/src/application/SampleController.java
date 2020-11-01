@@ -33,7 +33,6 @@ public class SampleController {
 	
 	@FXML
     private TextField fName2;
-
 	
 	@FXML
     private TextField lName2;
@@ -44,7 +43,7 @@ public class SampleController {
 
     
     @FXML
-    private TextField Amount;
+    private TextField amount;
     
     
     @FXML

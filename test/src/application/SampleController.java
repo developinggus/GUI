@@ -1,7 +1,8 @@
 package application;
 
 import java.io.File;
-
+import java.io.PrintWriter;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -422,6 +423,17 @@ public class SampleController {
     			new ExtensionFilter("All Files", "*.*"));
     	Stage stage = new Stage();
     	File targetFile = chooser.showSaveDialog(stage);
+    	String data = accounts.exportData();
+    	if ( targetFile != null ) {
+    		try {
+    			PrintWriter writer;
+    	        writer = new PrintWriter(targetFile);
+    	        writer.println(data);
+    	        writer.close();
+    		} catch (IOException ex) {    	   
+    			messageArea.appendText("Unable to export database.");
+    		}
+    	}
     	//export accounts database to a txt file
     }
     

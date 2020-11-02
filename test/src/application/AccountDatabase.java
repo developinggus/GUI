@@ -19,6 +19,40 @@ public class AccountDatabase {
 	}
 
 	/**
+	 * Returns the export data needed for the "export" tab in the GUI
+	 * @return export data with each token seperated by a comma
+	 */
+    public String exportData() {
+    	String data = "";
+    	for ( int i = 0; i < size; i++ ) {
+			if ( accounts[i] instanceof Checking) {
+				Checking item = (Checking) accounts[i];
+				data = data + 
+						"C," + 
+						accounts[i].toString().replaceAll("*",",") + "," +
+						String.valueOf(item.getDirectDeposit()) + "\n";
+			}
+
+			if ( accounts[i] instanceof MoneyMarket) {
+				MoneyMarket item = (MoneyMarket) accounts[i];
+				data = data + 
+						"M," + 
+						accounts[i].toString().replaceAll("*",",") + "," +
+						String.valueOf(item.getWithdrawals()) + "\n";
+			}
+
+			if ( accounts[i] instanceof Savings) {
+				Savings item = (Savings) accounts[i];
+				data = data + 
+						"S," + 
+						accounts[i].toString().replaceAll("*",",") + "," +
+						String.valueOf(item.getLoyalty()) + "\n";
+			}
+    	}
+    	return data;
+    }
+    
+	/**
 	 * Checks to see if account exists
 	 * @param account The account object
 	 * @return 1 if it exists, -1 otherwise

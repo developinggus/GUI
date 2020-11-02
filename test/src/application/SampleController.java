@@ -401,28 +401,26 @@ public class SampleController {
      */
     @FXML
     private void importFile(ActionEvent event) {
-    	messageArea.appendText("404");
     	FileChooser chooser = new FileChooser();
     	chooser.setTitle("Open Source File for the Import");
     	chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
     			new ExtensionFilter("All Files", "*.*"));
-    	messageArea.appendText("409");
     	Stage stage = new Stage();
     	File sourceFile = chooser.showOpenDialog(stage);
-    	messageArea.appendText("410");
     	BufferedReader reader;
     	StringBuilder sb = new StringBuilder();
-    	messageArea.appendText("413");
+    	
     	try {
     		reader = new BufferedReader(new FileReader(sourceFile));
     		String data = reader.readLine();
     		while ( data != null ) {
-    			messageArea.appendText(data);
+    			messageArea.appendText(data + "\n");
+    			data = reader.readLine();
     		}
     	} catch (IOException ex) {
     		messageArea.appendText("Unable to import data.");
     	}
-    	messageArea.appendText("423");
+    	
     	//Code to import process txt file and add accounts accordingly 
     	//all txt files will have a designated format.
     	return;

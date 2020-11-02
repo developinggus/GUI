@@ -1,6 +1,8 @@
 package application;
 
 import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -399,13 +401,28 @@ public class SampleController {
      */
     @FXML
     private void importFile(ActionEvent event) {
+    	messageArea.appendText("404");
     	FileChooser chooser = new FileChooser();
     	chooser.setTitle("Open Source File for the Import");
     	chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
     			new ExtensionFilter("All Files", "*.*"));
+    	messageArea.appendText("409");
     	Stage stage = new Stage();
     	File sourceFile = chooser.showOpenDialog(stage);
-    	
+    	messageArea.appendText("410");
+    	BufferedReader reader;
+    	StringBuilder sb = new StringBuilder();
+    	messageArea.appendText("413");
+    	try {
+    		reader = new BufferedReader(new FileReader(sourceFile));
+    		String data = reader.readLine();
+    		while ( data != null ) {
+    			messageArea.appendText(data);
+    		}
+    	} catch (IOException ex) {
+    		messageArea.appendText("Unable to import data.");
+    	}
+    	messageArea.appendText("423");
     	//Code to import process txt file and add accounts accordingly 
     	//all txt files will have a designated format.
     	return;
@@ -423,12 +440,13 @@ public class SampleController {
     			new ExtensionFilter("All Files", "*.*"));
     	Stage stage = new Stage();
     	File targetFile = chooser.showSaveDialog(stage);
-    	String data = accounts.exportData();
     	if ( targetFile != null ) {
     		try {
+    			String data = accounts.exportData();
     			PrintWriter writer;
     	        writer = new PrintWriter(targetFile);
     	        writer.println(data);
+    	        messageArea.appendText(data);
     	        writer.close();
     		} catch (IOException ex) {    	   
     			messageArea.appendText("Unable to export database.");

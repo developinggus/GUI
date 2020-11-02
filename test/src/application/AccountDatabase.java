@@ -24,6 +24,9 @@ public class AccountDatabase {
 	 */
     public String exportData() {
     	String data = "";
+    	if ( size == 0 ) {
+    		return "Database is empty.";
+    	}
     	for ( int i = 0; i < size; i++ ) {
 			if ( accounts[i] instanceof Checking) {
 				Checking item = (Checking) accounts[i];

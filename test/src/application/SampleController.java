@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.InputMismatchException;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -409,16 +410,29 @@ public class SampleController {
     	File sourceFile = chooser.showOpenDialog(stage);
     	BufferedReader reader;
     	StringBuilder sb = new StringBuilder();
+    	messageArea.appendText("Import starting..\n");
     	
     	try {
     		reader = new BufferedReader(new FileReader(sourceFile));
     		String data = reader.readLine();
-    		while ( data != null ) {
-    			messageArea.appendText(data + "\n");
-    			data = reader.readLine();
+    		if ( data == null ) {
+        		messageArea.appendText("Unable to import data.");
+        		return;
     		}
-    	} catch (IOException ex) {
-    		messageArea.appendText("Unable to import data.");
+    		if (data.equals("")) {
+        		messageArea.appendText("No data to import.");
+    		}
+    		while ((data = reader.readLine()) != null) {
+    			if ( data.equals("")) {
+    				data = "*EMPTY ENTRY FOUND*";
+    			}
+    			messageArea.appendText("Now importing: " + data + "\n");
+    			addData(data);
+    			//data = reader.readLine();
+    		}
+    		reader.close();
+    	} catch (Exception ex) {
+    		messageArea.appendText("Unable to import entry.");
     	}
     	
     	//Code to import process txt file and add accounts accordingly 
@@ -426,6 +440,99 @@ public class SampleController {
     	return;
     }
 
+    void addData(String data) {
+    	if (data.equals("")) {
+    		return;
+    	}
+    	String[] splitted = data.split(",");
+    	if (splitted.length != 6) {
+    		messageArea.appendText("Invalid data entry: " + data + "\n");
+    		return;
+    	}
+    	if (validEntries(splitted) == -1) {
+    		messageArea.appendText("Invalid account entries: " + data + "\n");
+    		return;
+    	}
+    	
+    	Profile p = new Profile(splitted[1],splitted[2]);
+    	Date d = new Date(splitted[4]);
+    	
+    	if (splitted[0].equals("C")) {
+			if(!splitted[5].toLowerCase().equals("false") &&
+					   !splitted[5].toLowerCase().equals("true") ) {
+						throw new InputMismatchException("Input data type mismatch.");
+					}
+    		Checking acc = new Checking(p, Double.parseDouble(splitted[3]), 
+					d, Boolean.parseBoolean(splitted[5]));
+    		if(accounts.add(acc)) {
+    			accounts.add(acc);
+    			messageArea.appendText("Account opened and added to the database.\n");
+    		}
+    		else {
+    			messageArea.appendText("Account is already in the database.\n");
+    		}
+    	}
+    	if (splitted[0].equals("S")) {
+			if(!splitted[5].toLowerCase().equals("false") &&
+					   !splitted[5].toLowerCase().equals("true") ) {
+						throw new InputMismatchException("Input data type mismatch.");
+					}
+    		Savings acc = new Savings(p, Double.parseDouble(splitted[3]), 
+					d, Boolean.parseBoolean(splitted[5]));
+    		if(accounts.add(acc)) {
+    			accounts.add(acc);
+    			messageArea.appendText("Account opened and added to the database.\n");
+    		}
+    		else {
+    			messageArea.appendText("Account is already in the database.\n");
+    		}
+    	}
+    	if (splitted[0].equals("M")) {
+    		MoneyMarket acc = new MoneyMarket(p, Double.parseDouble(splitted[3]), d);
+    		acc.setWithdrawals(Integer.parseInt(splitted[5]));
+    		if(accounts.add(acc)) {
+    			accounts.add(acc);
+    			messageArea.appendText("Account opened and added to the database.\n");
+    		}
+    		else {
+    			messageArea.appendText("Account is already in the database.\n");
+    		}
+    	}
+    	
+    	return;
+    	
+    }
+    
+    int validEntries(String[] splitted) {
+    	
+    	//missing name fields
+    	if(splitted[1].equals("") || splitted[2].equals("")) {
+    		//output error about missing input
+    		messageArea.appendText("ERROR: Incomplete name field.\n");
+    		return -1;
+    	}
+    	
+    	//missing or invalid balance
+    	if(!isValidBalance(splitted[3])) {
+    		//output error about missing/ improper balance input
+    		messageArea.appendText("ERROR: Missing or improper balance.\n");
+    		return -1;
+    	}
+    	String month = "";
+    	String day = "";
+    	String year = "";
+    	month = splitted[4].split("/")[0];
+		day = splitted[4].split("/")[1];
+		year = splitted[4].split("/")[2];
+		
+    	//missing or invalid date
+    	if(!isValidDate(year, month, day)) {
+    		messageArea.appendText("ERROR: Missing or invalid date.\n");
+    		return -1;
+    	}
+    	
+    	return 1;
+    }
     /**
      * export accounts from database to txt file
      * @param event clicking export menu button

@@ -493,14 +493,12 @@ public class SampleController {
     	return false;
     }
     
-    
-    
     /**
      * deposit a given amount in a pre-existing account.
      * @param event deposit radio button is pressed
      */
     @FXML
-    void deposit(ActionEvent event) {
+    private void deposit(ActionEvent event) {
     	
     	if(invalidDepositWithdrawInput()) {
     		return;
@@ -519,7 +517,6 @@ public class SampleController {
     	return;
     }
 
-    
     /**
      * helper that breaks down the withdrawals by type of account.
      * @param p profile of account to withdraw from
@@ -551,7 +548,7 @@ public class SampleController {
      * @param event clicking withdraw button
      */
     @FXML
-    void withdraw(ActionEvent event) {
+    private void withdraw(ActionEvent event) {
 
     	if(invalidDepositWithdrawInput()) {
     		return;

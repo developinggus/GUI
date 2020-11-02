@@ -482,7 +482,7 @@ public class SampleController {
      * @param event deposit radio button is pressed
      */
     @FXML
-    void deposit(ActionEvent event) {
+    private void deposit(ActionEvent event) {
     	
     	if(invalidDepositWithdrawInput()) {
     		return;
@@ -533,7 +533,7 @@ public class SampleController {
      * @param event clicking withdraw button
      */
     @FXML
-    void withdraw(ActionEvent event) {
+    private void withdraw(ActionEvent event) {
 
     	if(invalidDepositWithdrawInput()) {
     		return;

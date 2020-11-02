@@ -29,7 +29,10 @@ public class AccountDatabase {
 				Checking item = (Checking) accounts[i];
 				data = data + 
 						"C," + 
-						accounts[i].toString().replaceAll("*",",") + "," +
+						accounts[i].toString().replaceAll("\\*",",")
+						.replaceAll(" ","")
+						.replaceAll(accounts[i].getHolder().getFname(),accounts[i].getHolder().getFname() + ",")
+						.replaceAll("\\$","") + "," +
 						String.valueOf(item.getDirectDeposit()) + "\n";
 			}
 
@@ -37,7 +40,10 @@ public class AccountDatabase {
 				MoneyMarket item = (MoneyMarket) accounts[i];
 				data = data + 
 						"M," + 
-						accounts[i].toString().replaceAll("*",",") + "," +
+						accounts[i].toString().replaceAll("\\*",",")
+						.replaceAll(" ","")
+						.replaceAll(accounts[i].getHolder().getFname(),accounts[i].getHolder().getFname() + ",")
+						.replaceAll("\\$","") + "," +
 						String.valueOf(item.getWithdrawals()) + "\n";
 			}
 
@@ -45,7 +51,10 @@ public class AccountDatabase {
 				Savings item = (Savings) accounts[i];
 				data = data + 
 						"S," + 
-						accounts[i].toString().replaceAll("*",",") + "," +
+						accounts[i].toString().replaceAll("\\*",",")
+						.replaceAll(" ","")
+						.replaceAll(accounts[i].getHolder().getFname(),accounts[i].getHolder().getFname() + ",")
+						.replaceAll("\\$","") + "," +
 						String.valueOf(item.getLoyalty()) + "\n";
 			}
     	}

@@ -150,7 +150,6 @@ public class SampleController {
 		isLoyal.setDisable(true);
     }
     
-    
     /**
      * When savings account is clicked the proper check boxes are disabled and cleared for direct deposit and isloyal. 
      * @param event clicking the savings radio button.
@@ -163,7 +162,6 @@ public class SampleController {
 		isLoyal.setDisable(false);
     }
     
-    
     /**
      * When money market account is clicked check boxes are disabled and cleared for direct deposit and isloyal. 
      * @param event clicking the money market radio button.
@@ -175,7 +173,6 @@ public class SampleController {
 		isLoyal.setSelected(false);
 		isLoyal.setDisable(true);
     }
-    
     
     /**
      * checks if a potential str could be a valid balance for an account.
@@ -200,7 +197,6 @@ public class SampleController {
     	}
     	
     }
-    
     
     /**
      * checks if a potential triple of strings could be a valid date. 
@@ -228,7 +224,6 @@ public class SampleController {
     	}return false;
     }
    
-    
     /**
      * checks for correct input is received when trying to create an account.
      * @return true if all input is correct, false otherwise.
@@ -266,8 +261,7 @@ public class SampleController {
     	messageArea.appendText("\n");
     	return hasError;
     }
-    
-    
+      
     /**
      * Open an account from user input.
      * @param event clicking open account button.
@@ -432,10 +426,10 @@ public class SampleController {
     }
     
     /**
-     * checks if user input is valid for depositing.
+     * checks if user input is valid for depositing or withdrawing.
      * @return true if fields are valid, false otherwise.
      */
-    private boolean invalidDepositInput() {
+    private boolean invalidDepositWithdrawInput() {
     	boolean hasError = false;
     	//missing account type
     	if(!rbChecking2.isSelected() && !rbSavings2.isSelected() && !rbMoneyMarket2.isSelected() ) {
@@ -463,52 +457,111 @@ public class SampleController {
     }
     
     /**
+     * helper that breaks down the deposit by type of account.
+     * @param p profile of account to deposit into
+     * @param d	date account was opened
+     * @return true if deposit is successful, false otherwise.
+     */
+    private boolean depositHelp(Profile p, Date d) {
+    	if(rbChecking2.isSelected()) {
+    		Checking acc = new Checking(p, 0 , d, false);
+    		return accounts.deposit(acc, Double.parseDouble(amount.getText()));
+    	}
+    	
+    	if(rbSavings2.isSelected()) {
+    		Savings acc = new Savings(p, 0, d, false);
+    		return accounts.deposit(acc, Double.parseDouble(amount.getText()));
+    	}
+    	
+    	if(rbMoneyMarket2.isSelected()) {
+    		MoneyMarket acc = new MoneyMarket(p, 0 , d);
+    		return accounts.deposit(acc, Double.parseDouble(amount.getText()));
+    	}
+    	
+    	return false;
+    }
+    
+    
+    
+    /**
      * deposit a given amount in a pre-existing account.
      * @param event deposit radio button is pressed
      */
     @FXML
     void deposit(ActionEvent event) {
     	
-    	if(invalidDepositInput()) {
+    	if(invalidDepositWithdrawInput()) {
     		return;
     	}
     	
     	Profile p = new Profile(fName2.getText(), lName2.getText());
     	Date d = new Date("09/28/1994");
+    	boolean result = depositHelp(p, d);
 
+    	if(result) {
+        	messageArea.appendText(String.format("%,.2f", Double.parseDouble(amount.getText()))
+        				+ " deposited to account.\n");
+        	return;
+    	}
+    	messageArea.appendText("Account does not exist.\n");
+    	return;
+    }
+
+    
+    /**
+     * helper that breaks down the withdrawals by type of account.
+     * @param p profile of account to withdraw from
+     * @param d	date account was opened
+     * @return -1 if account doesn't exist, 0 if success, 1 if insufficient funds.
+     */
+    private int withdrawHelp(Profile p, Date d) {
+    	 	
     	if(rbChecking2.isSelected()) {
     		Checking acc = new Checking(p, 0 , d, false);
-    		if(accounts.deposit(acc, Double.parseDouble(amount.getText()))) {
-            	messageArea.appendText("Success\n");
-            	return;
-        	}
-    		messageArea.appendText("Unsuccessful\n");
-        	return;
+    		return accounts.withdrawal(acc, Double.parseDouble(amount.getText()));	
     	}
     	
     	if(rbSavings2.isSelected()) {
     		Savings acc = new Savings(p, 0, d, false);
-    		if(accounts.deposit(acc, Double.parseDouble(amount.getText()))) {
-            	messageArea.appendText("Success\n");
-            	return;
-        	}
-    		messageArea.appendText("Unsuccessful\n");
-        	return;
-    	}
+    		return accounts.withdrawal(acc, Double.parseDouble(amount.getText()));
+        }
     	
     	if(rbMoneyMarket2.isSelected()) {
     		MoneyMarket acc = new MoneyMarket(p, 0 , d);
-    		if(accounts.deposit(acc, Double.parseDouble(amount.getText()))) {
-            	messageArea.appendText("Success\n");
-            	return;
-        	}
-    		messageArea.appendText("Unsuccessful\n");
-        	return;
+    		return accounts.withdrawal(acc, Double.parseDouble(amount.getText()));
+    	}
+    		
+    	return -1;
+    }
+    
+    /**
+     * withdraw from account input from user.
+     * @param event clicking withdraw button
+     */
+    @FXML
+    void withdraw(ActionEvent event) {
+
+    	if(invalidDepositWithdrawInput()) {
+    		return;
     	}
     	
+    	Profile p = new Profile(fName2.getText(), lName2.getText());
+    	Date d = new Date("09/28/1994");
+    	int result = withdrawHelp(p, d);
 
-    	//check user input exists in database
-    	
+    	switch(result){
+    		case -1:
+    			messageArea.appendText("Account does not exist.\n");
+    			break;
+    		case 0:
+            	messageArea.appendText(String.format("%,.2f", Double.parseDouble(amount.getText()))
+        				+ " withdrawn from account.\n");    			
+            	break;
+    		case 1:
+            	messageArea.appendText("Insufficient funds.\n");
+    			break;
+    	}
+
     }
     
 }

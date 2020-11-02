@@ -422,6 +422,12 @@ public class SampleController {
      */
     @FXML
     private void exportFile(ActionEvent event) {
+    	FileChooser chooser = new FileChooser();
+    	chooser.setTitle("Open Target File for the Export");
+    	chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
+    			new ExtensionFilter("All Files", "*.*"));
+    	Stage stage = new Stage();
+    	File targetFile = chooser.showSaveDialog(stage);
     	//export accounts database to a txt file
     }
     

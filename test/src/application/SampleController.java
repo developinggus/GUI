@@ -481,8 +481,6 @@ public class SampleController {
     	return false;
     }
     
-    
-    
     /**
      * deposit a given amount in a pre-existing account.
      * @param event deposit radio button is pressed
@@ -507,7 +505,6 @@ public class SampleController {
     	return;
     }
 
-    
     /**
      * helper that breaks down the withdrawals by type of account.
      * @param p profile of account to withdraw from

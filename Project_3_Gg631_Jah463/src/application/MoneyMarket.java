@@ -53,4 +53,17 @@ public class MoneyMarket extends Account {
 	public int getWithdrawals() {
 		return withdrawals;
 	}
+	
+	/**
+	 * Formats the account information into a string
+	 * @return string of account data
+	 */
+	@Override
+	public String toString() {
+		String full_name = this.getHolder().getFname() + " " + this.getHolder().getLname();
+		String balance_to_string = "$" + String.format("%,.2f",this.getBalance());
+		String date_to_string = this.getDate().toString();
+		
+		return full_name + "* " + balance_to_string + "*" + date_to_string;  
+	}
 }

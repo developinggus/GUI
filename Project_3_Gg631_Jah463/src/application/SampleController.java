@@ -23,14 +23,6 @@ import javafx.stage.Stage;
 
 
 public class SampleController {
-	/*
-	 * TO-DO
-	 * Tab 2 & Tab 3
-	 * Deposit/withdraw
-	 * 
-	 * Import/export / display similar to project 2 printing
-	 * 
-	 */
     
 	private AccountDatabase accounts = new AccountDatabase();
 		
@@ -537,7 +529,9 @@ public class SampleController {
     int validEntries(String[] splitted) {
     	
     	//missing type fields
-    	if (!splitted[0].equals("C") && !splitted[0].equals("S") && !splitted[0].equals("M")) {
+    	if (!splitted[0].equals("C") 
+    			&& !splitted[0].equals("S") 
+    			&& !splitted[0].equals("M")) {
     		messageArea.appendText("ERROR: Invalid account type field.\n");
     		return -1;
     	}
@@ -570,6 +564,7 @@ public class SampleController {
     	
     	return 1;
     }
+    
     /**
      * export accounts from database to txt file
      * @param event clicking export menu button

@@ -42,13 +42,7 @@ public abstract class Account {
 	 * @return string of account data
 	 */
 	@Override
-	public String toString() {
-		String full_name = holder.getFname() + " " + holder.getLname();
-		String balance_to_string = "$" + String.format("%,.2f",balance);
-		String date_to_string = dateOpen.toString();
-		
-		return full_name + "* " + balance_to_string + "*" + date_to_string;  
-	}
+	public abstract String toString();
 	
 	/**
 	 * Calculates the monthly interest of the account

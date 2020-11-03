@@ -419,13 +419,18 @@ public class SampleController {
     				data = "*EMPTY ENTRY FOUND*";
     			}
     			messageArea.appendText("Now importing: " + data + "\n");
-    			addData(data);
+    			try {
+    				addData(data);
+    	    	} catch(InputMismatchException ex) {
+    	    		messageArea.appendText("Input data type mismatch.\n");
+    	    	} catch (Exception ex) {
+    	    		messageArea.appendText("Unable to import entry.\n");
+    	    	}
+    	    	
     			messageArea.appendText("\n");
     			//data = reader.readLine();
     		}
     		reader.close();
-    	} catch(InputMismatchException ex) {
-    		messageArea.appendText("Input data type mismatch.\n");
     	} catch (Exception ex) {
     		messageArea.appendText("Unable to import entry.\n");
     	}
@@ -523,6 +528,12 @@ public class SampleController {
     }
     
     int validEntries(String[] splitted) {
+    	
+    	//missing type fields
+    	if (!splitted[0].equals("C") && !splitted[0].equals("S") && !splitted[0].equals("M")) {
+    		messageArea.appendText("ERROR: Invalid account type field.\n");
+    		return -1;
+    	}
     	
     	//missing name fields
     	if(splitted[1].equals("") || splitted[2].equals("")) {

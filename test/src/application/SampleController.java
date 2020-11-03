@@ -415,10 +415,9 @@ public class SampleController {
     		reader = new BufferedReader(new FileReader(sourceFile));
     		String data = "";
     		while ((data = reader.readLine()) != null) {
-    			if ( data.equals("")) {
-    				data = "*EMPTY ENTRY FOUND*";
+    			if ( !data.equals("")) {
+        			messageArea.appendText("Now importing: " + data + "\n");
     			}
-    			messageArea.appendText("Now importing: " + data + "\n");
     			try {
     				addData(data);
     	    	} catch(InputMismatchException ex) {

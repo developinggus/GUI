@@ -417,17 +417,16 @@ public class SampleController {
     		while ((data = reader.readLine()) != null) {
     			if ( !data.equals("")) {
         			messageArea.appendText("Now importing: " + data + "\n");
+        			try {
+        				addData(data);
+        	    	} catch(InputMismatchException ex) {
+        	    		messageArea.appendText("Input data type mismatch.\n");
+        	    	} catch (Exception ex) {
+        	    		messageArea.appendText("Unable to import entry.\n");
+        	    	}
+        	    	
+        			messageArea.appendText("\n");
     			}
-    			try {
-    				addData(data);
-    	    	} catch(InputMismatchException ex) {
-    	    		messageArea.appendText("Input data type mismatch.\n");
-    	    	} catch (Exception ex) {
-    	    		messageArea.appendText("Unable to import entry.\n");
-    	    	}
-    	    	
-    			messageArea.appendText("\n");
-    			//data = reader.readLine();
     		}
     		reader.close();
     	} catch (Exception ex) {

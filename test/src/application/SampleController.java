@@ -440,6 +440,10 @@ public class SampleController {
     	return;
     }
 
+    /**
+     * Helper method to add entries into the database
+     * @param data Data entry
+     */
     void addData(String data) {
     	if (data.equals("")) {
     		return;
@@ -525,6 +529,11 @@ public class SampleController {
     	
     }
     
+    /**
+     * Checks if the entries are valid
+     * @param splitted
+     * @return -1 if invalid, 1 otherwise
+     */
     int validEntries(String[] splitted) {
     	
     	//missing type fields

@@ -410,7 +410,6 @@ public class SampleController {
     	Stage stage = new Stage();
     	File sourceFile = chooser.showOpenDialog(stage);
     	BufferedReader reader;
-    	StringBuilder sb = new StringBuilder();
     	messageArea.appendText("Import starting..\n");
     	try {
     		reader = new BufferedReader(new FileReader(sourceFile));
@@ -426,9 +425,9 @@ public class SampleController {
     		}
     		reader.close();
     	} catch(InputMismatchException ex) {
-    		messageArea.appendText("Input data type mismatch.");
+    		messageArea.appendText("Input data type mismatch.\n");
     	} catch (Exception ex) {
-    		messageArea.appendText("Unable to import entry.");
+    		messageArea.appendText("Unable to import entry.\n");
     	}
     	
     	messageArea.appendText("END OF IMPORT\n");
@@ -460,6 +459,13 @@ public class SampleController {
 					   !splitted[5].toLowerCase().equals("true") ) {
 						throw new InputMismatchException("Input data type mismatch.");
 					}
+			try {
+				Double.parseDouble(splitted[3]);
+			}
+			catch ( NumberFormatException e) {
+				throw new InputMismatchException("Input data type mismatch.");
+			}
+			
     		Checking acc = new Checking(p, Double.parseDouble(splitted[3]), 
 					d, Boolean.parseBoolean(splitted[5]));
     		if(accounts.add(acc)) {
@@ -475,6 +481,13 @@ public class SampleController {
 					   !splitted[5].toLowerCase().equals("true") ) {
 						throw new InputMismatchException("Input data type mismatch.");
 					}
+			try {
+				Double.parseDouble(splitted[3]);
+			}
+			catch ( NumberFormatException e) {
+				throw new InputMismatchException("Input data type mismatch.");
+			}
+			
     		Savings acc = new Savings(p, Double.parseDouble(splitted[3]), 
 					d, Boolean.parseBoolean(splitted[5]));
     		if(accounts.add(acc)) {
@@ -488,6 +501,14 @@ public class SampleController {
     	if (splitted[0].equals("M")) {
     		MoneyMarket acc = new MoneyMarket(p, Double.parseDouble(splitted[3]), d);
     		acc.setWithdrawals(Integer.parseInt(splitted[5]));
+    		
+			try {
+				Double.parseDouble(splitted[3]);
+			}
+			catch ( NumberFormatException e) {
+				throw new InputMismatchException("Input data type mismatch.");
+			}
+			
     		if(accounts.add(acc)) {
     			accounts.add(acc);
     			messageArea.appendText("Account opened and added to the database.\n");

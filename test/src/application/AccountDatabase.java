@@ -32,7 +32,8 @@ public class AccountDatabase {
 				Checking item = (Checking) accounts[i];
 				data = data + 
 						"C," + 
-						accounts[i].toString().replaceAll("\\*",",")
+						accounts[i].toString().replaceAll(",","")
+						.replaceAll("\\*",",")
 						.replaceAll(" ","")
 						.replaceAll(accounts[i].getHolder().getFname(),accounts[i].getHolder().getFname() + ",")
 						.replaceAll("\\$","") + "," +
@@ -43,7 +44,8 @@ public class AccountDatabase {
 				MoneyMarket item = (MoneyMarket) accounts[i];
 				data = data + 
 						"M," + 
-						accounts[i].toString().replaceAll("\\*",",")
+						accounts[i].toString().replaceAll(",","")
+						.replaceAll("\\*",",")
 						.replaceAll(" ","")
 						.replaceAll(accounts[i].getHolder().getFname(),accounts[i].getHolder().getFname() + ",")
 						.replaceAll("\\$","") + "," +
@@ -54,7 +56,8 @@ public class AccountDatabase {
 				Savings item = (Savings) accounts[i];
 				data = data + 
 						"S," + 
-						accounts[i].toString().replaceAll("\\*",",")
+						accounts[i].toString().replaceAll(",","")
+						.replaceAll("\\*",",")
 						.replaceAll(" ","")
 						.replaceAll(accounts[i].getHolder().getFname(),accounts[i].getHolder().getFname() + ",")
 						.replaceAll("\\$","") + "," +
@@ -454,6 +457,5 @@ public class AccountDatabase {
 
 
 	public static void main (String[] args) {
-
 	}
 }

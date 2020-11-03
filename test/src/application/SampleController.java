@@ -402,6 +402,7 @@ public class SampleController {
      */
     @FXML
     private void importFile(ActionEvent event) {
+  
     	FileChooser chooser = new FileChooser();
     	chooser.setTitle("Open Source File for the Import");
     	chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
@@ -411,29 +412,26 @@ public class SampleController {
     	BufferedReader reader;
     	StringBuilder sb = new StringBuilder();
     	messageArea.appendText("Import starting..\n");
-    	
     	try {
     		reader = new BufferedReader(new FileReader(sourceFile));
-    		String data = reader.readLine();
-    		if ( data == null ) {
-        		messageArea.appendText("Unable to import data.");
-        		return;
-    		}
-    		if (data.equals("")) {
-        		messageArea.appendText("No data to import.");
-    		}
+    		String data = "";
     		while ((data = reader.readLine()) != null) {
     			if ( data.equals("")) {
     				data = "*EMPTY ENTRY FOUND*";
     			}
     			messageArea.appendText("Now importing: " + data + "\n");
     			addData(data);
+    			messageArea.appendText("\n");
     			//data = reader.readLine();
     		}
     		reader.close();
+    	} catch(InputMismatchException ex) {
+    		messageArea.appendText("Input data type mismatch.");
     	} catch (Exception ex) {
     		messageArea.appendText("Unable to import entry.");
     	}
+    	
+    	messageArea.appendText("END OF IMPORT\n");
     	
     	//Code to import process txt file and add accounts accordingly 
     	//all txt files will have a designated format.
